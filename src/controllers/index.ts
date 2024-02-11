@@ -1,5 +1,6 @@
-import { userCreate } from "./user-controller";
+import { signup, login } from "./user-controller";
 
 export const userController = {
-  userCreate,
+  signup,
+  login,
 };

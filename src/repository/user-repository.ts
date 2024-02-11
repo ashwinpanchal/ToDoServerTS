@@ -28,4 +28,19 @@ export class UserRepository {
       throw { error };
     }
   }
+
+  async getUserByUsernameAndPassword(
+    data: UserInterface
+  ): Promise<{ user: UserInterface | null; success: boolean }> {
+    try {
+      const user = await User.findOne({ ...data });
+      if (user) {
+        return { user, success: true };
+      }
+      return { user, success: false };
+    } catch (error) {
+      console.log("Something went wrong at repository level");
+      throw { error };
+    }
+  }
 }
