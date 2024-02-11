@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 
 import repository from "../repository";
 import { UserInterface } from "../config/dbConfig";
+import env from "../config/serverConfig";
 
 export class UserService {
   userRepository;
@@ -20,7 +21,7 @@ export class UserService {
         return { token: "", success: false };
       }
       const user = await this.userRepository.create(data);
-      const token = jwt.sign({ id: user._id }, "SECRET", {
+      const token = jwt.sign({ id: user._id }, env.JWT_SECRET, {
         expiresIn: "1d",
       });
       return { token, success: true };
@@ -39,7 +40,7 @@ export class UserService {
       );
       const user = response.user;
       if (response.success && user) {
-        const token = jwt.sign({ id: user._id }, "SECRET", {
+        const token = jwt.sign({ id: user._id }, env.JWT_SECRET, {
           expiresIn: "1d",
         });
         return { token, success: true };
