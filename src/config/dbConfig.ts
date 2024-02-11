@@ -1,11 +1,11 @@
 import { Schema, model } from "mongoose";
 
-interface UserInterface {
+export interface UserInterface {
   username: string;
   password: string;
 }
 
-interface TodoInterface {
+export interface TodoInterface {
   title: String;
   description: String;
   done: Boolean;
