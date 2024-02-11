@@ -1,8 +1,7 @@
 import jwt from "jsonwebtoken";
 
 import repository from "../repository";
-import { User, UserInterface } from "../config/dbConfig";
-import { CreateUserServiceInterface } from "./interfaces";
+import { UserInterface } from "../config/dbConfig";
 
 export class UserService {
   userRepository;
@@ -10,10 +9,14 @@ export class UserService {
     this.userRepository = new repository.UserRepository();
   }
 
-  async create(data: UserInterface): Promise<CreateUserServiceInterface> {
+  async create(
+    data: UserInterface
+  ): Promise<{ token: string; success: boolean }> {
     try {
-      const existingUser = await User.findOne({ username: data.username });
-      if (existingUser) {
+      const existingUser = await this.userRepository.getUserByUsername({
+        username: data.username,
+      });
+      if (existingUser.success) {
         return { token: "", success: false };
       }
       const user = await this.userRepository.create(data);

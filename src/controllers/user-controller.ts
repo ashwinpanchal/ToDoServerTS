@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 
 import service from "../services";
-import { CreateUserServiceInterface } from "../services/interfaces";
 
 const userService = new service.UserService();
 
@@ -12,7 +11,7 @@ export const userCreate = async (
   try {
     const { username, password }: { username: string; password: string } =
       req.body;
-    const response: CreateUserServiceInterface = await userService.create({
+    const response = await userService.create({
       username,
       password,
     });
