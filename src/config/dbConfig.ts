@@ -3,6 +3,7 @@ import { Schema, model } from "mongoose";
 export interface UserInterface {
   username: string;
   password: string;
+  _id?: string;
 }
 
 export interface TodoInterface {
@@ -13,7 +14,12 @@ export interface TodoInterface {
 }
 
 const userSchema = new Schema<UserInterface>({
-  username: { type: String, required: true },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+  },
   password: { type: String, required: true },
 });
 
