@@ -29,3 +29,27 @@ export const create = async (
     throw { error };
   }
 };
+
+export const getAllByUserID = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const userId = req.headers["userId"];
+    if (typeof userId === "string") {
+      const todos = await todoService.getAllBySingleUserID(userId);
+      return res.json({
+        data: todos,
+        message: "Sucessfully fetched all the Todos",
+        success: true,
+        err: {},
+      });
+    }
+    return res.status(500).json({
+      message: "Failed to fetch todos",
+    });
+  } catch (error) {
+    console.log("Something went wrong at controller layer");
+    throw { error };
+  }
+};

@@ -1,5 +1,5 @@
 import { signup, login, me } from "./user-controller";
-import { create } from "./todo-controllers";
+import { create, getAllByUserID } from "./todo-controllers";
 
 export const userController = {
   signup,
@@ -9,4 +9,5 @@ export const userController = {
 
 export const todoController = {
   create,
+  getAllByUserID,
 };

@@ -5,3 +5,4 @@ import { todoController } from "../controllers";
 export const todoRouter = Router();
 
 todoRouter.post("/todos", authenticateJwt, todoController.create);
+todoRouter.get("/todos", authenticateJwt, todoController.getAllByUserID);

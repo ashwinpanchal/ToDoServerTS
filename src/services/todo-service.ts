@@ -16,4 +16,14 @@ export class TodoService {
       throw { error };
     }
   }
+
+  async getAllBySingleUserID(userId: string): Promise<TodoInterface[]> {
+    try {
+      const todos = await this.todoRepository.getAllByUserId(userId);
+      return todos;
+    } catch (error) {
+      console.log("Something went wrong at the service layer");
+      throw { error };
+    }
+  }
 }
