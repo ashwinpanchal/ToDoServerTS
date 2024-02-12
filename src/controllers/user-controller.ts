@@ -49,3 +49,17 @@ export const login = async (req: Request, res: Response): Promise<Response> => {
     throw { error };
   }
 };
+
+export const me = async (req: Request, res: Response): Promise<Response> => {
+  try {
+    const userId = req.headers["userId"];
+    if (typeof userId === "string") {
+      const { username } = await userService.me(userId);
+      return res.json({ username: username, success: true });
+    }
+    return res.json({ username: null, success: false });
+  } catch (error) {
+    console.log("Something went wrong at controller layer");
+    throw { error };
+  }
+};

@@ -52,4 +52,19 @@ export class UserService {
       throw { error };
     }
   }
+
+  async me(userId: string): Promise<{ username: string; success: boolean }> {
+    try {
+      const response = await this.userRepository.getUserByID(userId);
+      const user = response.user;
+      if (response.success && user) {
+        return { username: user.username, success: true };
+      } else {
+        return { username: "", success: false };
+      }
+    } catch (error) {
+      console.log("Something went wrong at service layer");
+      throw { error };
+    }
+  }
 }
