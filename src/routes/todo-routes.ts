@@ -6,3 +6,8 @@ export const todoRouter = Router();
 
 todoRouter.post("/todos", authenticateJwt, todoController.create);
 todoRouter.get("/todos", authenticateJwt, todoController.getAllByUserID);
+todoRouter.patch(
+  "/todos/:todoId/done",
+  authenticateJwt,
+  todoController.doneUpdate
+);

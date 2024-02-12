@@ -22,4 +22,19 @@ export class TodoRepository {
       throw { error };
     }
   }
+
+  async update(
+    todoId: string,
+    data: Partial<TodoInterface>
+  ): Promise<TodoInterface | null> {
+    try {
+      const updatedTodo = await Todo.findByIdAndUpdate(todoId, data, {
+        new: true,
+      });
+      return updatedTodo;
+    } catch (error) {
+      console.log("Something went wrong at the repository level");
+      throw { error };
+    }
+  }
 }

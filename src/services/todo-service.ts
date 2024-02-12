@@ -26,4 +26,16 @@ export class TodoService {
       throw { error };
     }
   }
+
+  async updateDoneToTrue(todoId: string): Promise<TodoInterface | null> {
+    try {
+      const updatedTodo = await this.todoRepository.update(todoId, {
+        done: true,
+      });
+      return updatedTodo;
+    } catch (error) {
+      console.log("Something went wrong at the service layer");
+      throw { error };
+    }
+  }
 }

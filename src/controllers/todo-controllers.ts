@@ -53,3 +53,28 @@ export const getAllByUserID = async (
     throw { error };
   }
 };
+
+export const doneUpdate = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  try {
+    const todoId: string = req.params.todoId;
+    const updatedTodo = await todoService.updateDoneToTrue(todoId);
+    if (updatedTodo) {
+      return res.json({
+        data: updatedTodo,
+        success: true,
+        err: {},
+      });
+    }
+    return res.status(404).json({
+      data: null,
+      success: false,
+      message: "Todo with the given todoId is not found",
+    });
+  } catch (error) {
+    console.log("Something went wrong at controller layer");
+    throw { error };
+  }
+};
