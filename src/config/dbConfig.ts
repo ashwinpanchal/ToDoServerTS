@@ -7,10 +7,11 @@ export interface UserInterface {
 }
 
 export interface TodoInterface {
-  title: String;
-  description: String;
-  done: Boolean;
-  userId: String;
+  title: string;
+  description: string;
+  done?: Boolean;
+  userId: string;
+  _id?: string;
 }
 
 const userSchema = new Schema<UserInterface>({
